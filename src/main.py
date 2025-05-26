@@ -7,6 +7,19 @@ def get_folder_path():
         return None
     return path
 
+def rename_files(file_pairs, folder_path):
+    for old_name, new_name in file_pairs:
+        old_path = os.path.join(folder_path, old_name)
+        new_path = os.path.join(folder_path, new_name)
+        try:
+            if os.path.exists(new_path):
+                print(f"Cannot rename {old_name} → {new_name}: target already exists.")
+                continue
+            os.rename(old_path, new_path)
+            print(f"Renamed: {old_name} → {new_name}")
+        except Exception as e:
+            print(f"Failed to rename {old_name}: {e}")
+
 def list_files(folder_path):
     return [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
 
@@ -38,7 +51,8 @@ def main():
 
     prefix = input("Please enter a prefix for new filenames: ").strip()
     new_names = generate_new_names(files, prefix)
-    print(new_names)
+
+    rename_files(new_names, folder_path)
 
 if __name__ == "__main__":
     main()
