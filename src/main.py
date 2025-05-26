@@ -56,7 +56,12 @@ def main():
     for old, new in new_names:
         print(f"{old} → {new}")
 
-    rename_files(new_names, folder_path)
+    rename_confirmation = input('Are you sure you want to rename the files? y/n ')
+
+    if rename_confirmation == 'y':
+        rename_files(new_names, folder_path)
+    else:
+        print('You declined to rename the files')
 
 if __name__ == "__main__":
     main()
