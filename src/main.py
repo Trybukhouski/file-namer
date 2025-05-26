@@ -52,6 +52,10 @@ def main():
     prefix = input("Please enter a prefix for new filenames: ").strip()
     new_names = generate_new_names(files, prefix)
 
+    print("\nPlanned renaming:")
+    for old, new in new_names:
+        print(f"{old} → {new}")
+
     rename_files(new_names, folder_path)
 
 if __name__ == "__main__":
